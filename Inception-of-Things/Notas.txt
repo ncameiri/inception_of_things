@@ -1,0 +1,18 @@
+https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index
+https://www.exxactcorp.com/blog/HPC/building-a-kubernetes-cluster-using-vagrant
+
+cat /etc/vbox/networks.conf
+* 172.42.42.100/16 192.168.0.0/16
+* 2001::/64
+
+https://www.virtuozzo.com/company/blog/scaling-kubernetes/
+
+Ordem das Taks:
+Master:
+1-preparation.sh
+2-bootstrap_kmaster.sh
+
+
+
+Workers:
+1-preparation.sh
