@@ -1,0 +1,32 @@
+https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index
+https://www.exxactcorp.com/blog/HPC/building-a-kubernetes-cluster-using-vagrant
+
+cat /etc/vbox/networks.conf
+* 172.42.42.100/16 192.168.0.0/16
+* 2001::/64
+
+https://www.virtuozzo.com/company/blog/scaling-kubernetes/
+
+
+https://www.letscloud.io/community/how-to-install-kubernetesk8s-and-docker-on-ubuntu-2004
+https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises
+kubectl create deployment nginx --image=nginx
+
+https://spacelift.io/blog/kubernetes-ingress
+https://stackoverflow.com/questions/44110876/kubernetes-service-external-ip-pending
+
+Ordem das Taks:
+Master:
+1-preparation.sh
+2-bootstrap_kmaster.sh
+
+
+
+Workers:
+1-preparation.sh
+
+http://172.42.42.100:10256/
+
+
+sudo socat TCP-LISTEN:80 TCP:10.99.80.83:80
+
