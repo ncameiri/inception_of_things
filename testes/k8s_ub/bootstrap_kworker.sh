@@ -1,5 +1,6 @@
 #!/bin/bash
-
+rm /etc/containerd/config.toml
+systemctl restart containerd
 # Join worker nodes to the Kubernetes cluster
 echo "[TASK 1] Join node to Kubernetes Cluster"
 apt-get  install -y sshpass >/dev/null 2>&1
