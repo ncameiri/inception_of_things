@@ -1,30 +1,18 @@
-# #!/bin/bash
 
-# # Initialize Kubernetes
-# echo "[TASK 1] Initialize Kubernetes Cluster"
-# rm /etc/containerd/config.toml
-# systemctl restart containerd
-# kubeadm init --apiserver-advertise-address=192.168.56.110 --pod-network-cidr=10.10.0.0/16 >> /root/kubeinit.log 
+#!/bin/bash
 
-# # Copy Kube admin config
-# echo "[TASK 2] Copy kube admin config to Vagrant user .kube directory"
-# mkdir /root/.kube
-# cp /etc/kubernetes/admin.conf /root/.kube/config
+# Install k3s
+echo "Installing k3s..."
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --node-ip 192.168.56.110 --tls-san $(hostname)"\
+    K3S_KUBECONFIG_MODE="644" sh -
 
-# mkdir /home/vagrant/.kube
-# cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
-# chown -R vagrant:vagrant /home/vagrant/.kube
+export token=$(cat /var/lib/rancher/k3s/server/agent-token)
+export token=$(echo $token | tr ":" "\n" | tail -1)
+
+echo "curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC=\"agent --node-ip 192.168.56.111\"\
+    K3S_URL=\"https://192.168.56.110:6443\"\
+    K3S_TOKEN=\"$token\"\
+    K3S_KUBECONFIG_MODE=\"644\" sh - " > join_script.sh 
 
 
-# # Deploy calico network
-# echo "[TASK 3] Deploy Calico network"
-# #su - vagrant -c "kubectl create -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml"
-# #kubectl apply -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
-# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
-# curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml -O
-# sed -i 's/192.168.0.0\/16/10.10.0.0\/16/g' custom-resources.yaml
-# kubectl create -f custom-resources.yaml
 
-# # Generate Cluster join command
-# echo "[TASK 4] Generate and save cluster join command to /joincluster.sh"
-# kubeadm token create --print-join-command > /joincluster.sh
