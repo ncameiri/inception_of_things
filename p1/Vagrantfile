@@ -9,11 +9,11 @@ Vagrant.configure(2) do |config|
 
   # Kubernetes Master Server
   config.vm.define "dmarceliS" do |kmaster|
-    kmaster.vm.box = "generic/debian10"
+    kmaster.vm.box = "bento/ubuntu-18.04"
     kmaster.vm.hostname = "dmarceliS"
     kmaster.vm.network "private_network", ip: "192.168.56.110"
     kmaster.vm.provider "virtualbox" do |v|
-      v.name = "kmaster"
+      v.name = "dmarceliS"
       v.memory = 1024
       v.cpus = 1
     end
@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
 
 
   config.vm.define "dmarceliSW" do |workernode|
-    workernode.vm.box = "generic/debian10"
+    workernode.vm.box = "bento/ubuntu-18.04"
     workernode.vm.hostname = "dmarceliSW"
     workernode.vm.network "private_network", ip: "192.168.56.111"
     workernode.vm.provider "virtualbox" do |v|
