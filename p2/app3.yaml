@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curls
+  namespace: novo
+  labels:
+    app: curls  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curls
+  template:
+    metadata:
+      labels:
+        app: curls
+    spec:
+      containers:
+      - name: curls
+        image: amazon/aws-cli
+        ports:
+        - containerPort: 80
+        command: ["sleep","infinity"]

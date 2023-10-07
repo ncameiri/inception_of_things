@@ -29,6 +29,9 @@ http://172.42.42.100:10256/
 
 
 sudo socat TCP-LISTEN:80 TCP:10.99.80.83:80
+sudo socat TCP-LISTEN:83,reuseaddr,fork TCP:10.43.130.86:80
+
+https://docs.k3s.io/installation/network-options
 
 curl -sfL https://get.k3s.io | K3S_URL=https://dmarceliS:6443 K3S_TOKEN=K10c8a1969d4f1337ce9e6c16f9e33e6087e6c0c41ddf9e5b6e53a4dc0c2c6e9222::server:f24da592bd5e336d4dbe5a6dac6c2afa sh -
 
@@ -36,3 +39,10 @@ curl -sfL https://get.k3s.io | K3S_URL=https://dmarceliS:6443 K3S_TOKEN=K10c8a19
 
  https://docs.k3s.io/cluster-access
  https://github.com/traefik/traefik/blob/master/docs/content/getting-started/quick-start-with-kubernetes.md
+
+https://blog.differentpla.net/blog/2023/01/06/traefik-dashboard/
+ 
+ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+ chmod 700 get_helm.sh
+ ./get_helm.sh
+ helm uninstall traefik --kubeconfig /etc/rancher/k3s/k3s.yaml -n kube-system
