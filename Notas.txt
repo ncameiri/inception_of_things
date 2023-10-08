@@ -48,3 +48,6 @@ https://blog.differentpla.net/blog/2023/01/06/traefik-dashboard/
  helm uninstall traefik --kubeconfig /etc/rancher/k3s/k3s.yaml -n kube-system
 
  https://github.com/k3s-io/k3s/issues/1613#issuecomment-647295522
+
+
+ ➜  p1 git:(main) ✗ curl -H "Host: app1.com"  http://192.168.56.110/
