@@ -46,3 +46,5 @@ https://blog.differentpla.net/blog/2023/01/06/traefik-dashboard/
  chmod 700 get_helm.sh
  ./get_helm.sh
  helm uninstall traefik --kubeconfig /etc/rancher/k3s/k3s.yaml -n kube-system
+
+ https://github.com/k3s-io/k3s/issues/1613#issuecomment-647295522

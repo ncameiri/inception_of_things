@@ -32,7 +32,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 80
   selector:
     app: nginx-testes
 
@@ -45,7 +45,8 @@ metadata:
   name: nginx-testes-ing
   #namespace: kube-system
   annotations:
-    kubernetes.io/ingress.ClassName: "traefik"
+    app.kubernetes.io/instance: traefik-kube-system
+    app.kubernetes.io/name: traefik
 spec:
   rules:
   - http:
