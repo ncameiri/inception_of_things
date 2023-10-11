@@ -17,7 +17,9 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo service docker start
 
 wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
-
+#ou
+wget  https://github.com/k3d-io/k3d/releases/download/v5.6.0/k3d-linux-amd64
+chmod +x k3d-linux-amd64
 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64
 
