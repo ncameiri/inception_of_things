@@ -18699,6 +18699,7 @@ rules:
   resources:
   - '*'
   verbs:
+  - create
   - delete
   - get
   - patch
@@ -18893,6 +18894,10 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-rbac-cm
+data:
+  policy.default: role:argocd-server
+  policy.csv: |
+    p, role:argocd-server, exec, create, /, allow
 ---
 apiVersion: v1
 data:
