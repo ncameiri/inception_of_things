@@ -29,7 +29,8 @@ chmod +x kubectl
 k3d cluster create iot  -p "8080:80@loadbalancer" -p "8888:8888@loadbalancer" -p "8443:443@loadbalancer"
 
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+#kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -n argocd -f argo_manifest.yaml
 kubectl apply -f argo_in.yaml -n argocd
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d

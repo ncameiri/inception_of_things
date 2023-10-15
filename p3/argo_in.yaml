@@ -61,20 +61,21 @@
 #             name: app1-svc
 #             port:
 #               number: 80
----
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argo-ing
   #namespace: kube-system
-  annotations:
-  #   app.kubernetes.io/instance: traefik-kube-system
-  #   app.kubernetes.io/name: traefik
-    ingress.kubernetes.io/ssl-redirect: "false"
+  # annotations:
+  #   # app.kubernetes.io/instance: traefik-kube-system
+  #   # app.kubernetes.io/name: traefik
+  #   ingress.kubernetes.io/ssl-redirect: "false"
+  #   ingress.kubernetes.io/force-ssl-redirect: "false"
+  #   ingress.kubernetes.io/ssl-passthrough: "false"
 spec:
+  ingressClassName: traefik
   rules:
-  - host : 
+  - host: 
     http:
       paths:
       - path: /
