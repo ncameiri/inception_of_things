@@ -67,3 +67,57 @@ https://opensource.com/article/21/7/automating-argo-cd
 Bonus
 
 https://docs.gitlab.com/charts/installation/
+
+https://zhimin-wen.medium.com/gitlab-on-onprem-kubernetes-icp-3-1-b06dcd09df7c
+
+helm repo add gitlab https://charts.gitlab.io/
+helm repo update
+helm upgrade --install gitlab gitlab/gitlab \
+ --cleanup-on-fail   --atomic  \
+  --set global.hosts.domain=172.18.0.2.nip.io \
+  --set global.hosts.externalIP=172.18.0.2 \
+  --set postgresql.image.tag=13.6.0 \
+    --set certmanager-issuer.email=me@example.com 
+  
+  
+   --cleanup-on-fail   --atomic  \
+   --set global.ingress.enabled=true \
+  --set nginx-ingress.enabled=false \
+  --set certmanager.install=false \
+  --set global.ingress.configureCertmanager=false \
+  --set gitlab-runner.install=false \
+  --set global.hosts.https=true \
+  --set global.ingress.class= \
+  --set prometheus.install=false 
+
+
+
+INSTALAÇÂO TESTADA:
+
+helm upgrade --install gitlab gitlab/gitlab     --set global.hosts.domain=127.0.0.1   --set global.hosts.externalIP=172.18.0.2   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=false  --set nginx-ingress.enabled=false 
+
+kubectl port-forward gitlab-webservice-default-5cb549878c-45lm4 9001:8080
+
+
+Customizações 🔨🔨
+alterar o ingressClassName para traefik
+
+kubectl patch ing gitlab-webservice-default -p '{"spec": {"ingressClassName": "traefik"}}'
+
+$KUBERNETES_IP
+
+kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["$KUBERNETES_IP"], "secretName": "gitlab-gitlab-tls"}]}}'
+
+kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["172.18.0.2"], "secretName": "gitlab-gitlab-tls"}]}}'
+
+
+kubectl  patch ing gitlab-webservice-default -p '{"spec":{"rules":[{"host":"","http":{"paths":[{"backend":{"service":{ "name":"gitlab-webservice-default","port":{"number":8181 }}},"path": "/", "pathType": "Prefix"}]}}]}}'  
+
+
+
+Novos Users requerem aprovação entrar com root e a pass:
+kubectl  get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d
+
+Ainda tem de se ver se é possivel fazer certificado CAfile + CRLfile para verificar o git
+git -c http.sslVerify=false clone https://gitlab.127.0.0.1/root/gitlab_test.git
+
