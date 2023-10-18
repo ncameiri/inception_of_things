@@ -62,3 +62,8 @@ p3
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 kubectl port-forward argocd-server-5985b6cf6f-l27sw -n argocd 9999:8080
+https://opensource.com/article/21/7/automating-argo-cd
+
+Bonus
+
+https://docs.gitlab.com/charts/installation/
