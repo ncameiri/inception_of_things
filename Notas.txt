@@ -114,6 +114,8 @@ kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["172
 kubectl  patch ing gitlab-webservice-default -p '{"spec":{"rules":[{"host":"","http":{"paths":[{"backend":{"service":{ "name":"gitlab-webservice-default","port":{"number":8181 }}},"path": "/", "pathType": "Prefix"}]}}]}}'  
 
 
+é preciso customizar nos /etc/hosts
+172.18.0.2 gitlab.127.0.0.1
 
 Novos Users requerem aprovação entrar com root e a pass:
 kubectl  get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d
