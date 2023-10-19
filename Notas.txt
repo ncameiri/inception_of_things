@@ -74,8 +74,8 @@ helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 helm upgrade --install gitlab gitlab/gitlab \
  --cleanup-on-fail   --atomic  \
-  --set global.hosts.domain=172.18.0.2.nip.io \
-  --set global.hosts.externalIP=172.18.0.2 \
+  --set global.hosts.domain=172.19.0.2.nip.io \
+  --set global.hosts.externalIP=172.19.0.2 \
   --set postgresql.image.tag=13.6.0 \
     --set certmanager-issuer.email=me@example.com 
   
@@ -94,7 +94,7 @@ helm upgrade --install gitlab gitlab/gitlab \
 
 INSTALAÇÂO TESTADA:
 
-helm upgrade --install gitlab gitlab/gitlab     --set global.hosts.domain=127.0.0.1   --set global.hosts.externalIP=172.18.0.2   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=false  --set nginx-ingress.enabled=false 
+helm upgrade --install gitlab gitlab/gitlab     --set global.hosts.domain=127.0.0.1   --set global.hosts.externalIP=172.19.0.2   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=true  --set nginx-ingress.enabled=false 
 
 kubectl port-forward gitlab-webservice-default-5cb549878c-45lm4 9001:8080
 
@@ -108,14 +108,14 @@ $KUBERNETES_IP
 
 kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["$KUBERNETES_IP"], "secretName": "gitlab-gitlab-tls"}]}}'
 
-kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["172.18.0.2"], "secretName": "gitlab-gitlab-tls"}]}}'
+kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["172.19.0.2"], "secretName": "gitlab-gitlab-tls"}]}}'
 
 
 kubectl  patch ing gitlab-webservice-default -p '{"spec":{"rules":[{"host":"","http":{"paths":[{"backend":{"service":{ "name":"gitlab-webservice-default","port":{"number":8181 }}},"path": "/", "pathType": "Prefix"}]}}]}}'  
 
 
 é preciso customizar nos /etc/hosts
-172.18.0.2 gitlab.127.0.0.1
+172.19.0.2 gitlab.127.0.0.1
 
 Novos Users requerem aprovação entrar com root e a pass:
 kubectl  get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d
