@@ -75,7 +75,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: 
+  - host: argo-cd-42.ncameiri
     http:
       paths:
       - path: /

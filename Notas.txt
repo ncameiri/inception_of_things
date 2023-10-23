@@ -48,7 +48,7 @@ https://blog.differentpla.net/blog/2023/01/06/traefik-dashboard/
  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
  chmod 700 get_helm.sh
  ./get_helm.sh
- helm uninstall traefik --kubeconfig /etc/rancher/k3s/k3s.yaml -n kube-system
+ #helm uninstall traefik --kubeconfig /etc/rancher/k3s/k3s.yaml -n kube-system
 
  https://github.com/k3s-io/k3s/issues/1613#issuecomment-647295522
 
@@ -74,8 +74,8 @@ helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 helm upgrade --install gitlab gitlab/gitlab \
  --cleanup-on-fail   --atomic  \
-  --set global.hosts.domain=172.19.0.2.nip.io \
-  --set global.hosts.externalIP=172.19.0.2 \
+  --set global.hosts.domain=172.18.0.2.nip.io \
+  --set global.hosts.externalIP=172.18.0.2 \
   --set postgresql.image.tag=13.6.0 \
     --set certmanager-issuer.email=me@example.com 
   
@@ -94,7 +94,7 @@ helm upgrade --install gitlab gitlab/gitlab \
 
 INSTALAÇÂO TESTADA:
 
-helm upgrade --install gitlab gitlab/gitlab     --set global.hosts.domain=127.0.0.1   --set global.hosts.externalIP=172.19.0.2   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=true  --set nginx-ingress.enabled=false 
+helm upgrade --install gitlab gitlab/gitlab     --set global.hosts.domain=127.0.0.1   --set global.hosts.externalIP=172.18.0.2   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=true  --set nginx-ingress.enabled=false 
 
 kubectl port-forward gitlab-webservice-default-5cb549878c-45lm4 9001:8080
 
@@ -106,16 +106,16 @@ kubectl patch ing gitlab-webservice-default -p '{"spec": {"ingressClassName": "t
 
 $KUBERNETES_IP
 
-kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["$KUBERNETES_IP"], "secretName": "gitlab-gitlab-tls"}]}}'
+#kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["$KUBERNETES_IP"], "secretName": "gitlab-gitlab-tls"}]}}'
 
-kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["172.19.0.2"], "secretName": "gitlab-gitlab-tls"}]}}'
+kubectl patch ing gitlab-webservice-default -p '{"spec": {"tls": [{"hosts":["172.18.0.2"], "secretName": "gitlab-gitlab-tls"}]}}'
 
 
 kubectl  patch ing gitlab-webservice-default -p '{"spec":{"rules":[{"host":"","http":{"paths":[{"backend":{"service":{ "name":"gitlab-webservice-default","port":{"number":8181 }}},"path": "/", "pathType": "Prefix"}]}}]}}'  
 
 
 é preciso customizar nos /etc/hosts
-172.19.0.2 gitlab.127.0.0.1
+172.18.0.2 gitlab.127.0.0.1
 
 Novos Users requerem aprovação entrar com root e a pass:
 kubectl  get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d
