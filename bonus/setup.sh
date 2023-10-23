@@ -18,3 +18,4 @@ echo "\033[0;35mYour ARGO CD Login, DONT SHARE THIS WITH ANYONE\n\tlogin: admin\
 
 echo "\033[0;32mYour GitLAB Login, DONT SHARE THIS WITH ANYONE\n\tlogin: root\n\tpassword:  "$(kubectl  get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d); echo "\033[0m"
 
+echo "\033[0;31mAdd this to your /etc/hosts:\n\t$K3D_IP\tgitlab.ncameiri.42\n\t$K3D_IP\targo-cd-42.ncameiri\033[0m"
