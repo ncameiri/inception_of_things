@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
 
-  config.vm.provision "shell", path: "preparation.sh"
+  config.vm.provision "shell", path: "./scripts/preparation.sh"
 
   # Kubernetes Master Server
   config.vm.define "dmarceliS" do |kmaster|

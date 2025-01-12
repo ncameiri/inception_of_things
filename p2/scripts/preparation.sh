@@ -26,6 +26,6 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --node-ip 192.168.56.110
     K3S_KUBECONFIG_MODE="644" sh -
 
 echo "[TASK 6] Applying apps..."
-kubectl apply -f /vagrant/apps/app1.yaml
-kubectl apply -f /vagrant/apps/app2.yaml
-kubectl apply -f /vagrant/apps/app3.yaml
+kubectl apply -f /vagrant/confs/apps/app1.yaml
+kubectl apply -f /vagrant/confs/apps/app2.yaml
+kubectl apply -f /vagrant/confs/apps/app3.yaml
