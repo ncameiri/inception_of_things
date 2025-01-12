@@ -11,7 +11,7 @@ apt update && apt-get install curl -y
 
 echo "[TASK 3] Enable ssh password authentication"
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-systemctl restart sshd
+systemctl restart ssh
 
 # Set Root password
 echo "[TASK 4] Set root password"

@@ -12,7 +12,7 @@ apt update && apt-get install curl -y
 
 echo "[TASK 11] Enable ssh password authentication"
 sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-systemctl restart sshd
+systemctl restart ssh
 
 # Set Root password
 echo "[TASK 12] Set root password"
@@ -20,4 +20,4 @@ echo -e "kubeadmin\nkubeadmin" | passwd root
 #echo "kubeadmin" | passwd --stdin root >/dev/null 2>&1
 
 # Update vagrant user's bashrc file
-echo "export TERM=xterm" >> /etc/bashrc
+#echo "export TERM=xterm" >> /etc/bashrc

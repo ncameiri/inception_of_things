@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: app3
-        image: daniginga/iot-basic-backend:app3
+        image: ncameiri/iot-basic-backend:app3
         ports:
         - containerPort: 3000
 
@@ -32,7 +32,8 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 3000
+    # targetPort: 3000
+    targetPort: 80
   selector:
     app: app3
 
@@ -49,7 +50,7 @@ metadata:
     app.kubernetes.io/name: traefik
 spec:
   rules:
-  - host : app3.com
+  - host : ""
     http:
       paths:
       - path: /

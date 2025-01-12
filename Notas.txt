@@ -1,6 +1,14 @@
 
 p1
 
+boxes images
+https://portal.cloud.hashicorp.com/vagrant/discover?architectures=amd64&next=CixXeUl5TURJMExURXhMVEkwVkRBeE9qUXhPalV4TGpZek5UTTVNVm9pWFE9PQ%3D%3D&providers=virtualbox&query=ubuntu&sort=updated_at%20desc
+Alterar setup Vbox -  https://www.thisprogrammingthing.com/2013/changing-the-directory-vagrant-stores-the-vms-in/
+
+levantar com -> vagrant up
+
+vagrant ssh dmarceliS
+
 https://developer.hashicorp.com/vagrant/tutorials/getting-started/getting-started-index
 https://www.exxactcorp.com/blog/HPC/building-a-kubernetes-cluster-using-vagrant
 
@@ -51,6 +59,12 @@ https://blog.differentpla.net/blog/2023/01/06/traefik-dashboard/
  #helm uninstall traefik --kubeconfig /etc/rancher/k3s/k3s.yaml -n kube-system
 
  https://github.com/k3s-io/k3s/issues/1613#issuecomment-647295522
+
+
+
+
+
+
 
 p2
 

@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
 
   # Kubernetes Master Server
   config.vm.define "dmarceliS" do |kmaster|
-    kmaster.vm.box = "bento/ubuntu-18.04"
+    kmaster.vm.box = "boxen/ubuntu-24.10"
     kmaster.vm.hostname = "dmarceliS"
     kmaster.vm.network "private_network", ip: "192.168.56.110"
     kmaster.vm.provider "virtualbox" do |v|

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: app1
-        image: daniginga/iot-basic-backend:app1
+        image: ncameiri/iot-basic-backend:app1
         ports:
         - containerPort: 3000
 
@@ -32,7 +32,8 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 3000
+    #targetPort: 3000
+    targetPort: 80
   selector:
     app: app1
 
