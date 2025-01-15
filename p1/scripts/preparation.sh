@@ -8,6 +8,13 @@ cat >>/etc/hosts<<EOF
 EOF
 
 echo "[TASK 2] Install Curl"
+
+while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 ; do
+echo "Waiting for other apt-get instances to exit"
+# Sleep to avoid pegging a CPU core while polling this lock
+sleep 1
+done
+
 apt update && apt-get install curl -y
 
 echo "[TASK 11] Enable ssh password authentication"

@@ -1,4 +1,6 @@
 
+Instalar no browser app tipo ModHeader
+
 p1
 
 boxes images
@@ -78,6 +80,25 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 kubectl port-forward argocd-server-5985b6cf6f-l27sw -n argocd 9999:8080
 https://opensource.com/article/21/7/automating-argo-cd
 
+
+http://192.168.56.110:80/ -> argo-cd-42.ncameiri:80
+
+
+
+ao criar a app
+application name -> 42-app
+repository url -> https://github.com/ncameiri/ncameiri_argocd_sync.git
+revision HEAD
+Path app-control
+
+
+
+###EM TESTES
+./kubectl exec -it -n argocd deploy/argocd-server -- bash
+
+git clone https://github.com/ncameiri/ncameiri_argocd_sync.git
+./kubectl apply -f /home/vagrant/ncameiri_argocd_sync/app-control/test-app.yaml
+
 Bonus
 
 https://docs.gitlab.com/charts/installation/
@@ -104,6 +125,20 @@ helm upgrade --install gitlab gitlab/gitlab \
   --set global.ingress.class= \
   --set prometheus.install=false 
 
+
+######Bonus a 15Jan
+
+A partir do docker da maq
+
+helm upgrade --install gitlab gitlab/gitlab \
+  --timeout 600s \
+  --set global.hosts.domain=ncameiri.42 \
+  --set global.hosts.externalIP=127.0.0.1 \
+  --set certmanager-issuer.email=me@example.com \
+  --set gitlab-runner.install=false \
+  --set nginx-ingress.enabled=false 
+
+#################
 
 
 INSTALAÇÂO TESTADA:

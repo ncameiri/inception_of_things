@@ -1,8 +1,8 @@
-k3d cluster create iot  -p "8080:80@loadbalancer" -p "8888:8888@loadbalancer" -p "8443:443@loadbalancer"
+k3d cluster create iot  -p "80:80@loadbalancer" -p "8888:8888@loadbalancer" -p "443:443@loadbalancer"
 
 until [ ! -z $K3D_IP ]; do K3D_IP=$(kubectl get svc -A | grep traefik | tr " " "\n" | grep "172."); done 2>/dev/null
 
-helm upgrade --install gitlab gitlab-7.4.1/gitlab    --set global.hosts.domain=ncameiri.42   --set global.hosts.externalIP=$K3D_IP   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=false  --set nginx-ingress.enabled=false 
+helm upgrade --install gitlab gitlab-7.4.1/gitlab    --set global.hosts.domain=ncameiri.42.com   --set global.hosts.externalIP=$K3D_IP   --set postgresql.image.tag=13.6.0     --set certmanager-issuer.email=me@example.com --set gitlab-runner.install=false  --set nginx-ingress.enabled=false 
 
 kubectl patch ing gitlab-webservice-default -p '{"spec": {"ingressClassName": "traefik"}}'
 
